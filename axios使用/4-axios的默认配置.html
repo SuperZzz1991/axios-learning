@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+	<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<title>axios的默认配置</title>
+</head>
+<body>
+	<div class="container">
+		<h2 class="page-header">其它使用</h2>
+		<button class="btn btn-primary">发送GET请求</button>
+		<button class="btn btn-warning">发送POST请求</button>
+		<button class="btn btn-success">发送PUT请求</button>
+		<button class="btn btn-danger">发送DELETE请求</button>
+	</div>
+	<script type="text/javascript">
+		const btns = document.querySelectorAll('button')
+
+		//默认配置
+		axios.defaults.method = 'GET'
+		axios.defaults.baseURL = 'http://localhost:3000'
+		axios.defaults.params = {id:1}
+		axios.defaults.timeout = 3000
+
+		btns[0].onclick = function() {
+			axios({
+				url:'/posts',
+			}).then(response => {
+				console.log(response)
+			})
+		}
+
+		//post
+		btns[1].onclick = function() {
+			axios.post(
+				'http://localhost:3000/comments', 
+				{
+					'body': '喜大普奔',
+					'postId': 1
+				}).then(response => {
+					console.log(response)
+				})
+		}
+	</script>
+</body>
+</html>
